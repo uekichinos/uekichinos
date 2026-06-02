@@ -1,8 +1,15 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
 import path from 'path';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const faviconB64 = readFileSync(path.join(__dirname, 'favicon.png')).toString('base64');
+const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><clipPath id="c"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+  <image href="data:image/png;base64,${faviconB64}" width="100" height="100" clip-path="url(#c)"/>
+</svg>`;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,7 +33,7 @@ function renderPage() {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>uekichinos</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -109,8 +116,9 @@ function renderPage() {
 </html>`;
 }
 
-app.get('/favicon.png', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'favicon.png'));
+app.get('/favicon.svg', (_req, res) => {
+  res.setHeader('Content-Type', 'image/svg+xml');
+  res.send(faviconSvg);
 });
 
 app.get('/', (_req, res) => {
