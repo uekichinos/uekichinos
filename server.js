@@ -22,6 +22,7 @@ function renderPage() {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>uekichinos</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -103,6 +104,10 @@ function renderPage() {
 </body>
 </html>`;
 }
+
+app.get('/favicon.png', (_req, res) => {
+  res.sendFile(new URL('./favicon.png', import.meta.url).pathname);
+});
 
 app.get('/', (_req, res) => {
   res.send(renderPage());
