@@ -1,4 +1,8 @@
 import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -106,7 +110,7 @@ function renderPage() {
 }
 
 app.get('/favicon.png', (_req, res) => {
-  res.sendFile(new URL('./favicon.png', import.meta.url).pathname);
+  res.sendFile(path.join(__dirname, 'favicon.png'));
 });
 
 app.get('/', (_req, res) => {
