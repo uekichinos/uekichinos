@@ -84,7 +84,7 @@ function renderPage() {
       padding: 0.4rem 0.9rem; border-radius: 20px;
       border: 1px solid var(--border); font-size: 0.85rem;
       color: var(--text); background: var(--surface);
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s;
       position: relative; overflow: hidden;
     }
     .pill::before {
@@ -95,7 +95,7 @@ function renderPage() {
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
       transition: left 0.4s ease;
     }
-    .pill:hover { border-color: var(--accent); text-decoration: none; transform: rotate(-2deg); }
+    .pill:hover { border-color: var(--accent); text-decoration: none; }
     .pill:hover::before { left: 150%; }
     .pill svg { flex-shrink: 0; }
 
