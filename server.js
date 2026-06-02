@@ -84,9 +84,19 @@ function renderPage() {
       padding: 0.4rem 0.9rem; border-radius: 20px;
       border: 1px solid var(--border); font-size: 0.85rem;
       color: var(--text); background: var(--surface);
-      transition: border-color 0.15s;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative; overflow: hidden;
     }
-    .pill:hover { border-color: var(--accent); text-decoration: none; }
+    .pill::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transition: left 0.4s ease;
+    }
+    .pill:hover { border-color: var(--accent); text-decoration: none; transform: rotate(-2deg); }
+    .pill:hover::before { left: 150%; }
     .pill svg { flex-shrink: 0; }
 
   </style>
@@ -108,7 +118,7 @@ function renderPage() {
         ${NPM_SVG} npm
       </a>
       <a class="pill" href="https://satuatap.app" target="_blank" rel="noopener">
-        ${SATUATAP_SVG} satuatap.app
+        ${SATUATAP_SVG} Satu Atap
       </a>
     </div>
   </header>
